@@ -1,0 +1,56 @@
+create table hs8(
+hs8_no int  primary key,
+hs8_des varchar(250),
+hs6_no int,
+policy varchar(250),
+conditions varchar(250),
+foreign key(hs6_no) references hs6(hs6_no) on delete cascade
+);
+
+create table hs6(
+hs6_no int primary key,
+hs6_des varchar(250),
+hs4_no int,
+foreign key(hs4_no) references hs4(hs4_no) on delete cascade
+);
+
+
+create table hs4(
+hs4_no int primary key,
+hs4_des varchar(250),
+hs2_no int,
+foreign key(hs2_no) references chapter(chapter_no) on delete cascade
+);
+
+create table chapter(
+chapter_no int primary key,
+chapter_des varchar(250)
+);
+
+insert into chapter (select * from trade.chapter);
+
+
+insert into hs4(
+select * from trade.new_hs4
+);
+
+insert into hs6(
+select * from trade.new_hs6
+);
+
+select * from new_hs6 where hs4_no not in(select hs4_no from new_hs4);
+
+
+create table master(
+itc int primary key,
+descrition varchar(250),
+hs4_no int,
+hs4_des varchar(250),
+hs6_no int,
+hs6_des varchar(250),
+hs8_des varchar(250),
+policy varchar(250),
+conditions varchar(250),
+);
+
+

@@ -1,0 +1,38 @@
+create table hs8(
+hs8_no int primary key,
+hs8_des varchar(300),
+hs6_no int,
+policy varchar(300),
+conditions varchar(300),
+foreign key(hs6_no ) references hs6(hs6_no)
+);
+
+
+
+create table hs6(
+hs6_no int primary key,
+hs6_des varchar(300),
+hs4_no int ,
+foreign key(hs4_no) references hs4(hs4_no)
+);
+
+create table hs4(
+hs4_no int primary key,
+hs4_des varchar(300),
+hs2_no int ,
+foreign key(hs2_no ) references chapter(chapter_no)
+);
+
+create table chapter(
+chapter_no int primary key,
+chapter_des varchar(300)
+
+
+);
+
+
+insert into chapter(select * from trade.chapter);
+
+insert into hs4(select hs4_no,hs4_des,chapter_no from trade.hs4,trade.chapter);
+
+
